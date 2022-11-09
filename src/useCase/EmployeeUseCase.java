@@ -25,12 +25,15 @@ public class EmployeeUseCase {
 		System.out.println(e1.EmplRegistration(employee));
 		
 	}
+	
+
+	
+	
+	
 	public static void main(String[] args) {
 		EmployeeUseCase obj=new EmployeeUseCase();
 		obj.insertEmpl();
-//	DateTimeFormatter dd=DateTimeFormatter.ofPattern("yyyy-mm-dd");
-//	LocalDateTime now=LocalDateTime.now();
-//	System.out.println(DateTimeFormatter.ofPattern("yyyy-mm-dd").format(now));
+
 	
 	}
 	
