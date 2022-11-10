@@ -13,6 +13,14 @@ public class Department {
 
 
 
+	public Department(String dname, int numberOfEmployee) {
+		super();
+		this.dname = dname;
+		this.numberOfEmployee = numberOfEmployee;
+	}
+
+
+
 	public Department(int did, String dname, int numberOfEmployee) {
 		super();
 		this.did = did;

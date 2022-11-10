@@ -6,20 +6,42 @@ public class Employee {
 	private String address;
 	private String email;
 	private String password;
-	
+	private String department;
 	
 	public Employee() {
 		super();
 	}
 
 
-	public Employee( String name, String address, String email, String password) {
+	public Employee(String name, String address, String email, String password,String department) {
 		super();
 		this.name = name;
 		this.address = address;
 		this.email = email;
 		this.password = password;
+		this.department=department;
+	}
+
+
+	public Employee(int id, String name, String address, String email, String password,String department) {
+		super();
+		this.emplId=id;
+		this.name = name;
+		this.address = address;
+		this.email = email;
+		this.password = password;
+		this.department=department;
 //		this.JoinigDate = joinig_date;
+	}
+
+
+	public String getDepartment() {
+		return department;
+	}
+
+
+	public void setDepartment(String department) {
+		this.department = department;
 	}
 
 
