@@ -3,9 +3,14 @@ package adminDao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
 
 import adminInputFromUser.InputFromUserForAdmin;
 import connectionWithDatabase.ConnectingDataBases;
+import employeeDao.EmployeeDao;
+import employeeDao.EmployeeDaoImpl;
 import model.Department;
 import model.Employee;
 
@@ -44,6 +49,18 @@ public class AdminDaoImpl implements AdminDao{
 			int x=ps.executeUpdate();
 			if(x>0) {
 				msg="Registration done succesfully";
+				PreparedStatement ps1=con.prepareStatement("select NumberOfEmployee from department where dname=?");
+				ps1.setString(1, employee.getDepartment());
+				ResultSet rs1=ps1.executeQuery();
+				if(rs1.next()) {
+					int data=rs1.getInt(1);
+					data++;
+					PreparedStatement ps3=con.prepareStatement("update department set NumberOfEmployee=? where dname=?");
+					ps3.setInt(1, data);
+					ps3.setString(2, employee.getDepartment());
+					ps3.executeUpdate();
+				}
+				
 			}
 			
 		} catch (Exception e) {
@@ -71,5 +88,101 @@ public class AdminDaoImpl implements AdminDao{
 		};
 		
 	}
+
+
+
+	@Override
+	public String transeferEmployee(int emplID,String department) {
+		int EmployeeNumber=0;
+		String msg="Transfor failed";
+		try (Connection con=ConnectingDataBases.DatabaseConnetion()){
+			
+			PreparedStatement ps=con.prepareStatement("select department from employee where emplId=?");
+			ps.setInt(1, emplID);
+			ResultSet rs=ps.executeQuery();
+			
+			if(rs.next()) {
+				String dname=rs.getString("department");
+				
+				PreparedStatement ps1=con.prepareStatement("select NumberOfEmployee from department where dname=?");
+				
+				ps1.setString(1,dname);
+				
+				ResultSet rs1=ps1.executeQuery();
+				
+				if(rs1.next()) {
+				EmployeeNumber=	rs1.getInt("NumberOfEmployee");	
+				if(EmployeeNumber>0) {
+					EmployeeNumber=EmployeeNumber-1;
+					
+					PreparedStatement ps2=con.prepareStatement("update department set NumberOfEmployee=? where dname=?");
+					ps2.setInt(1, EmployeeNumber);
+					ps2.setString(2, dname);
+					ps2.executeUpdate();
+					
+					PreparedStatement ps3=con.prepareStatement("update employee set department=? where emplID=?");
+					ps3.setString(1, department);
+					ps3.setInt(2, emplID);
+					int x=ps3.executeUpdate();
+					
+					if(x>0) {
+						PreparedStatement ps4=con.prepareStatement("select NumberOfEmployee from department where dname=?");
+						ps4.setString(1,department);
+						
+						ResultSet rs2=ps4.executeQuery();
+						
+						if(rs2.next()) {
+							int currentEmployeeNum=rs2.getInt("NumberOfEmployee");
+							currentEmployeeNum++;
+							PreparedStatement ps5=con.prepareStatement("update department set NumberOfEmployee=? where dname=?");
+							ps5.setInt(1, currentEmployeeNum);
+							ps5.setString(2, department);
+							ps5.executeUpdate();
+							msg="Transefer done succesfully";
+						}
+					}
+					
+				}
+			  }
+			}
+			
+	
+		
+			else {
+				
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+			msg=e.getMessage();
+		}
+		
+		return msg;
+	}
+
+	@Override
+	public List<Employee> ViewEmployeeDetail() {
+		List<Employee> list=new ArrayList<>();
+		
+		try(Connection con=ConnectingDataBases.DatabaseConnetion()) {
+			
+			PreparedStatement ps=con.prepareStatement("select * from employee");
+			ResultSet rs=ps.executeQuery();
+			while(rs.next()) {
+				int id=rs.getInt("emplID");
+				String name=rs.getString("name");
+				String address=rs.getString("address");
+				String email=rs.getString("email");
+				String department=rs.getString("department");
+				Employee employee=new Employee(id, name, address, email, department);
+				list.add(employee);
+			}
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+			
+		}
+		return list;
+	}
+
 
 }

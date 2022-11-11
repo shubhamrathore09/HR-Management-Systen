@@ -11,6 +11,20 @@ public class Employee {
 	public Employee() {
 		super();
 	}
+	
+	
+
+
+	public Employee(int emplId, String name, String address, String email, String department) {
+		super();
+		this.emplId = emplId;
+		this.name = name;
+		this.address = address;
+		this.email = email;
+		this.department = department;
+	}
+
+
 
 
 	public Employee(String name, String address, String email, String password,String department) {
