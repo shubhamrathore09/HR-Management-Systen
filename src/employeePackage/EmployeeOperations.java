@@ -12,7 +12,6 @@ import model.Employee;
 
 public class EmployeeOperations {
 	public String EmployeeLogin() {
-		
 		Scanner sc=new Scanner(System.in);
 		System.out.println("Enter employee username");
 		String email=sc.next();
@@ -31,26 +30,48 @@ public class EmployeeOperations {
 			
 				System.out.println("welcome "+name);
 				if(found!=null) {
-					System.out.println("Enter 1 to change password");
+					System.out.println("Enter 1 to perform operation of employee Enter 0 to exist");
+					int operation=sc.nextInt();
+					while(operation!=0) {
+						
+				
+					System.out.println("Enter 1 to view detail of employee");
+					System.out.println("Enter 2 to change password");
+					EmployeeDao e1=new EmployeeDaoImpl();
 					int x=sc.nextInt();
-					if(x==1) {
-					EmployeeDao obj=new EmployeeDaoImpl();
-					System.out.println(obj.changePassword(email));
+					switch (x) {
+					case 1: {
+						Employee employee=new Employee();
+						employee=e1.ViewEmployeeDetail(email);
+						System.out.println("Name -"+employee.getName());
+						System.out.println("Address -"+employee.getAddress());
+						System.out.println("Email -"+employee.getEmail());
+						System.out.println("Employee ID -"+employee.getEmplId());
+						System.out.println("Employee Password -"+employee.getPassword());
+						System.out.println("Department -"+employee.getDepartment());
+						break;
 					}
+					case 2:{
+						
+						System.out.println(e1.changePassword(email));
+						break;
+					}
+					default:
+						
+					}
+					System.out.println("Enter 1 to perform operation of employee Enter 0 to exist");
+					 operation=sc.nextInt();
+				}
 				}
 			}
+			
 			else {
 				System.out.println(msg);
 			}
 		} catch (Exception e) {
 			// TODO: handle exception
-			msg=e.getMessage();
-			
+			msg=e.getMessage();			
 		}
 		return msg;
-	}
-	public static void main(String[] args) {
-//		EmployeeOperations e1=new EmployeeOperations();
-//		e1.EmployeeLogin();
 	}
 }

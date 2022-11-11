@@ -13,7 +13,7 @@ public class InputFromUserForAdmin {
 		String msg="Adding failed";
 		System.out.println("Enter Department Name");
 		String dname=sc.next();
-		System.out.println("Enter number of employee should be in that department");
+		System.out.println("Enter number of employee");
 		int number=sc.nextInt();
 		Department dept1=new Department( dname, number);
 		AdminDao d2=new AdminDaoImpl();
@@ -36,6 +36,18 @@ public class InputFromUserForAdmin {
 		Employee employee=new Employee(name, address, email, password, department);
 		AdminDao emp=new AdminDaoImpl();
 		msg=emp.employeeRegistration(employee);
+		return msg;
+	}
+	public String ChnageEmployeeDepartment() {
+		String msg="change faild";
+		Scanner sc=new Scanner(System.in);
+		System.out.println("Enter emplID");
+		int empl=sc.nextInt();
+		System.out.println("Enter Department name");
+		String department=sc.next();
+		
+		AdminDao emp=new AdminDaoImpl();
+		msg=emp.transeferEmployee(empl, department);
 		return msg;
 	}
 }

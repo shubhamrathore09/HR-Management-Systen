@@ -3,6 +3,7 @@ package useCase;
 import java.util.Scanner;
 
 import adminPackage.AdminOperations;
+import employeePackage.EmployeeOperations;
 
 public class MainOperatingClass {
 	
@@ -17,15 +18,18 @@ public class MainOperatingClass {
 		int x=sc.nextInt();
 		if(x==1) {
 			AdminOperations obj=new AdminOperations();
-			
 		    obj.AdminLogin();
-		   
+		    System.out.println("Done");
 		}
 		else if(x==2){
-			
+			EmployeeOperations obj=new EmployeeOperations();
+			obj.EmployeeLogin();
+			System.out.println("Done");
 		}
+		
 		else {
 			System.out.println("Wrong entry");
 		}
+		
 	}
 }

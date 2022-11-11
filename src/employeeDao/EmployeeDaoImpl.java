@@ -53,8 +53,7 @@ public class EmployeeDaoImpl implements EmployeeDao{
 			// TODO: handle exception
 			msg=e.getMessage();
 		}
-		
-		
+		 
 		return msg;
 	}
 
