@@ -57,4 +57,25 @@ public class EmployeeDaoImpl implements EmployeeDao{
 		return msg;
 	}
 
+	@Override
+	public String ApplyLeave(int emplId,int numberOfleave) {
+		String msg="Un-avail to apply";
+		try(Connection con=ConnectingDataBases.DatabaseConnetion()) {
+			PreparedStatement ps=con.prepareStatement("update employeeLeave set apply_eave=? where emplId=?");
+			
+			ps.setInt(1, numberOfleave);
+			ps.setInt(2, emplId);
+			
+			int x=ps.executeUpdate();
+			if(x>0) {
+				msg="apply succesfully";
+				System.out.println("asdf");
+			}
+		} catch (Exception e) {
+			msg=e.getMessage();
+			System.out.println("lkg");
+		}
+		return msg;
+	}
+
 }

@@ -11,4 +11,5 @@ public interface AdminDao {
 	public String employeeRegistration(Employee employee);
 	public void ViewDepartment();
 	public List<Employee> ViewEmployeeDetail();
+	public String ProvideLeave();
 }
