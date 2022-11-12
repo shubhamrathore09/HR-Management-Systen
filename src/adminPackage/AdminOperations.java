@@ -40,6 +40,7 @@ public class AdminOperations {
 					System.out.println("press 3 to view department Details");
 					System.out.println("press 4 to transfer employee in other department");
 					System.out.println("press 5 to view employee details");
+					System.out.println("Press 6 to provide leave to employee");
 					int x=sc.nextInt();
 					switch (x) {
 					case 1: {
@@ -74,8 +75,15 @@ public class AdminOperations {
 						System.out.println("Employee department :-"+e1.getDepartment());
 						System.out.println("Employee address :-"+e1.getAddress());
 						System.out.println("------------------------------------------------------");
-						break;
+						
 					}
+					break;
+					}
+					case 6:{
+						AdminDao obj=new AdminDaoImpl();
+						
+						System.out.println(obj.ProvideLeave());
+						break;
 					}
 					default:
 						System.out.println("invalid entry");

@@ -49,6 +49,21 @@ public class AdminDaoImpl implements AdminDao{
 			int x=ps.executeUpdate();
 			if(x>0) {
 				msg="Registration done succesfully";
+				
+				PreparedStatement PsForLeave=con.prepareStatement("select emplId from employee where email=?");
+				
+				PsForLeave.setString(1, employee.getEmail());
+				
+				ResultSet RsForLeave=PsForLeave.executeQuery();
+				if(RsForLeave.next()) {
+					int emplId=RsForLeave.getInt("emplId");
+					PreparedStatement psForinsertIntoEmployeeLeave =con.prepareStatement("insert into EmployeeLeave values(?,?,?,?)");
+					psForinsertIntoEmployeeLeave.setInt(1, emplId);
+					psForinsertIntoEmployeeLeave.setInt(2, 24);
+					psForinsertIntoEmployeeLeave.setInt(3, 0);
+					psForinsertIntoEmployeeLeave.setInt(4, 0);
+					psForinsertIntoEmployeeLeave.executeUpdate();
+				}
 				PreparedStatement ps1=con.prepareStatement("select NumberOfEmployee from department where dname=?");
 				ps1.setString(1, employee.getDepartment());
 				ResultSet rs1=ps1.executeQuery();
@@ -182,6 +197,45 @@ public class AdminDaoImpl implements AdminDao{
 			
 		}
 		return list;
+	}
+
+	@Override
+	public String ProvideLeave() {
+		String msg="Leave not provided";
+		
+		try ( Connection con=ConnectingDataBases.DatabaseConnetion()){
+			PreparedStatement ps=con.prepareStatement("select * from employeeLeave where apply_eave>?");
+			ps.setInt(1, 0);
+			ResultSet rs=ps.executeQuery();
+			while(rs.next()) {
+				int applyleave=rs.getInt("apply_eave");
+				int available_leave=rs.getInt("available_leave");
+			int emplId=rs.getInt("emplId");
+				if(available_leave>=applyleave) {
+					int provide=applyleave;
+					
+					int remainleave=available_leave-applyleave;
+					
+				   applyleave=applyleave-applyleave;
+					PreparedStatement ps1=con.prepareStatement("update employeeleave set available_leave=?, apply_eave=?, Last_Approved_eave=? where emplId=?");
+					ps1.setInt(1, remainleave);
+					ps1.setInt(2, applyleave);
+					ps1.setInt(3, provide);
+					ps1.setInt(4,emplId);
+					int x=ps1.executeUpdate();
+					if(x>0) {
+						msg="Leave provided";
+					}
+				}
+			}
+			
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+			msg=e.getMessage();
+		}
+		
+		return msg;
 	}
 
 

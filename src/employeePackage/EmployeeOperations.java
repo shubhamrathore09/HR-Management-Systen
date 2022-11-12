@@ -33,10 +33,9 @@ public class EmployeeOperations {
 					System.out.println("Enter 1 to perform operation of employee Enter 0 to exist");
 					int operation=sc.nextInt();
 					while(operation!=0) {
-						
-				
 					System.out.println("Enter 1 to view detail of employee");
 					System.out.println("Enter 2 to change password");
+					System.out.println("Enter 3 to apply for leave");
 					EmployeeDao e1=new EmployeeDaoImpl();
 					int x=sc.nextInt();
 					switch (x) {
@@ -54,6 +53,14 @@ public class EmployeeOperations {
 					case 2:{
 						
 						System.out.println(e1.changePassword(email));
+						break;
+					}
+					case 3:{
+						System.out.println("Please enter number of leave you want");
+						int NumberOfLeave=sc.nextInt();
+						System.out.println("Please enter your employeeId");
+						int emplid=sc.nextInt();
+						System.out.println(e1.ApplyLeave(emplid, NumberOfLeave));
 						break;
 					}
 					default:
