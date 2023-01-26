@@ -1,4 +1,4 @@
-# Hr Management System
+# HR Management System
 
 
 This project is developed by Me only
