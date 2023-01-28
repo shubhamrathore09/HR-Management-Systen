@@ -9,7 +9,7 @@ This project is developed by Me only
 - MySQL
 - JDBC
 
-## Note:- Before going to start project create database in mysql name as ab1 take help of sb101ProjectSql.txt file and create table as mention in text file.
+Note:- Before going to start project create database in mysql name as ab1 take help of sb101ProjectSql.txt file and create table as mention in text file.
 
 ## Modules
 - Admin Module
