@@ -1,6 +1,6 @@
 package exception;
 
-import model.Employee;
+import bean.Employee;
 
 public class EmployeeException extends Exception
 {
