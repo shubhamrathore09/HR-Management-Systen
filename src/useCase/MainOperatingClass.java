@@ -2,8 +2,8 @@ package useCase;
 
 import java.util.Scanner;
 
-import adminPackage.AdminOperations;
-import employeePackage.EmployeeOperations;
+import adminService.AdminOperations;
+import employeeService.EmployeeOperations;
 
 public class MainOperatingClass {
 	
