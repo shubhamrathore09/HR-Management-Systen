@@ -1,4 +1,4 @@
-package employeePackage;
+package employeeService;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
