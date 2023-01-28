@@ -16,7 +16,7 @@ public static Connection DatabaseConnetion() {
 		System.out.println(e.getMessage());
 	}
 	
-	String url="jdbc:mysql://localhost:3306/organization";
+	String url="jdbc:mysql://localhost:3306/ab1";
 	
 	try {
 		con=DriverManager.getConnection(url, "root", "qwerty");

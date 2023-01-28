@@ -1,0 +1,67 @@
+
+create database and give then name in connection package class.
+
+*******************************************************
+
+creating table in database 
+
+********************************************************
+
+create table admin(
+adminId int primary key auto_increment,
+adminname varchar(15),
+adminUserName varchar(15),
+adminPassword varchar(15)
+);
+
+
+*************************************************************
+
+create table department(
+did int primary key auto_increment,
+dname varchar(15),
+NumberOfEmployee int);
+
+
+**********************************************************
+
+create table employee(
+emplId int primary key auto_increment,
+name varchar(15),
+address varchar(15),
+email varchar(15),
+password varchar(15),
+joinDate Date,
+department varchar(15)
+);
+
+***************************************************************
+
+create table employeeleave(
+emplId int primary key,
+Available_leave int,
+Apply_eave int,
+Last_approved_eave int);
+
+****************************************************
+
+Inserting data into admin manually from database 
+
+insert into admin(adminname,adminUserName,adminpassword) value('shubham','shubham09','123');
+
+
+******************************************************
+Run from useCase package MainOperationClass project and give input from console automatically ask you input from console 
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -55,6 +55,7 @@ public class AdminDaoImpl implements AdminDao{
 				PsForLeave.setString(1, employee.getEmail());
 				
 				ResultSet RsForLeave=PsForLeave.executeQuery();
+
 				if(RsForLeave.next()) {
 					int emplId=RsForLeave.getInt("emplId");
 					PreparedStatement psForinsertIntoEmployeeLeave =con.prepareStatement("insert into EmployeeLeave values(?,?,?,?)");
